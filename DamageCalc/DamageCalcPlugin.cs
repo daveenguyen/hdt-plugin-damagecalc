@@ -27,17 +27,19 @@ namespace DamageCalc
 
         public void OnLoad()
         {
+            MainEntry.Load();
         }
 
         public void OnUnload()
         {
+            MainEntry.Unload();
         }
 
         public void OnUpdate()
         {
         }
 
-        #region
+        #region Plugin Info
         public string Author
         {
             get { return _author; }
