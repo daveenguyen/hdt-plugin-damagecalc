@@ -16,7 +16,7 @@ namespace DamageCalc.Stores
 
         public int TotalDamage
         {
-            get { return calculateDamage(); }
+            get { return minionsDamageList.Sum(); }
         }
 
         public int SavageDamage
@@ -62,11 +62,6 @@ namespace DamageCalc.Stores
 
             minionsDamageList = builder.ToImmutable();
 
-        }
-
-        private int calculateDamage()
-        {
-            return minionsDamageList.Sum();
         }
     }
 }

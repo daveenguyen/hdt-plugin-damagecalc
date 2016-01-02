@@ -62,19 +62,29 @@ namespace DamageCalc.Components
                 default:
                     _info.Text = "Damage Calculator\n";
 
-                    if (payload.OpponentEHP - boardStore.TotalDamage <= 0)
-                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - boardStore.TotalDamage);
-                    _info.Text += string.Format("Board Damage: {0}\n", boardStore.TotalDamage);
+                    int damage = boardStore.TotalDamage;
+                    _info.Text += string.Format("{0}Board Damage: {1}\n", CheckLethal(payload, damage), damage);
 
-                    if (payload.OpponentEHP - (boardStore.TotalDamage + boardStore.SavageDamage) <= 0)
-                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - (boardStore.TotalDamage + boardStore.SavageDamage));
-                    _info.Text += string.Format("Savage Roar: +{0} = {1}\n", boardStore.SavageDamage, boardStore.TotalDamage + boardStore.SavageDamage);
+                    damage = boardStore.TotalDamage + boardStore.SavageDamage;
+                    _info.Text += string.Format("{0}Savage Roar: {1}\n", CheckLethal(payload, damage), damage);
 
-                    if (payload.OpponentEHP - (boardStore.TotalDamage + 2 * boardStore.SavageDamage) <= 0)
-                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - (boardStore.TotalDamage + 2 * boardStore.SavageDamage));
-                    _info.Text += string.Format("2xSavage Roar: +{0} = {1}\n", 2 * boardStore.SavageDamage, boardStore.TotalDamage + 2 * boardStore.SavageDamage);
+                    damage = boardStore.TotalDamage + 2*boardStore.SavageDamage;
+                    _info.Text += string.Format("{0}2xSavage Roar: {1}\n", CheckLethal(payload, damage), damage);
 
                     break;
+            }
+        }
+
+        string CheckLethal(Payload payload, int damage)
+        {
+            int hp = payload.OpponentEHP;
+
+            if (hp - damage <= 0)
+            {
+                return string.Format("*LETHAL({0})* ", hp - damage);
+            } else
+            {
+                return string.Empty;
             }
         }
     }
