@@ -61,8 +61,19 @@ namespace DamageCalc.Components
                     break;
                 default:
                     _info.Text = "Damage Calculator\n";
+
+                    if (payload.OpponentEHP - boardStore.TotalDamage <= 0)
+                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - boardStore.TotalDamage);
                     _info.Text += string.Format("Board Damage: {0}\n", boardStore.TotalDamage);
+
+                    if (payload.OpponentEHP - (boardStore.TotalDamage + boardStore.SavageDamage) <= 0)
+                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - (boardStore.TotalDamage + boardStore.SavageDamage));
                     _info.Text += string.Format("Savage Roar: +{0} = {1}\n", boardStore.SavageDamage, boardStore.TotalDamage + boardStore.SavageDamage);
+
+                    if (payload.OpponentEHP - (boardStore.TotalDamage + 2 * boardStore.SavageDamage) <= 0)
+                        _info.Text += string.Format("*LETHAL({0})* ", payload.OpponentEHP - (boardStore.TotalDamage + 2 * boardStore.SavageDamage));
+                    _info.Text += string.Format("2xSavage Roar: +{0} = {1}\n", 2 * boardStore.SavageDamage, boardStore.TotalDamage + 2 * boardStore.SavageDamage);
+
                     break;
             }
         }
