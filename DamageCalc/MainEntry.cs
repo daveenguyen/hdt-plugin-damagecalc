@@ -9,15 +9,15 @@ namespace DamageCalc
 {
     static class MainEntry
     {
-        static InfoBox info;
         static PluginDispatcher dispatcher;
         static BoardStore boardStore;
+        static InfoBoxController info;
 
         public static void Load()
         {
             dispatcher = new PluginDispatcher();
             boardStore = new BoardStore(dispatcher);
-            info = new InfoBox(boardStore);
+            info = new InfoBoxController(boardStore);
 
             // Game
             GameEvents.OnInMenu.Add(OnInMenu);
