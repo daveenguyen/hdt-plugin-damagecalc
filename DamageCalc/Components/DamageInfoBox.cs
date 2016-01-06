@@ -45,7 +45,7 @@ namespace DamageCalc.Components
 
         public string Name { get; set; }
 
-        public DamageInfoBox(string name = "Untitled")
+        public DamageInfoBox(string name = "Untitled", int position=0)
         {
             _info = new HearthstoneTextBlock();
             _info.Text = "";
@@ -54,27 +54,21 @@ namespace DamageCalc.Components
 
 
             _canvas.Children.Add(_info);
-
-            DelayedSetPosition(1000);
+            
             Name = name;
             Damage = 0;
             Health = 0;
+
+            fromTop(position);
         }
 
-        private async void DelayedSetPosition(int delay)
+        public async void fromTop(int position)
         {
-            await Task.Delay(delay);
+            await Task.Delay(1000);
 
-            double fromTop = _canvas.Height * .75;
             double fromLeft = _canvas.Width * .3;
-
-            Canvas.SetTop(_info, fromTop);
+            double fromTop = _canvas.Height * .75 + (position * _info.FontSize);
             Canvas.SetLeft(_info, fromLeft);
-        }
-
-        public void fromTop(int index)
-        {
-            double fromTop = _canvas.Height * .75 + (index * _info.FontSize);
             Canvas.SetTop(_info, fromTop);
         }
 

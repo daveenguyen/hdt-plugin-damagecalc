@@ -21,13 +21,9 @@ namespace DamageCalc.Components
             boardStore = b;
             boardStore.EmitChange += OnEmitChange;
 
-            boardDmg = new DamageInfoBox("Board Damage");
-            savageDmg = new DamageInfoBox("Savage Roar");
-            doubleSavageDmg = new DamageInfoBox("Double Savage");
-
-            boardDmg.fromTop(0);
-            savageDmg.fromTop(2);
-            doubleSavageDmg.fromTop(3);
+            boardDmg = new DamageInfoBox("Board Damage", 0);
+            savageDmg = new DamageInfoBox("Savage Roar", 2);
+            doubleSavageDmg = new DamageInfoBox("Double Savage", 3);
         }
 
         private void OnEmitChange(object sender, Payload e)

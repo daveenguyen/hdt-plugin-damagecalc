@@ -56,7 +56,6 @@
     <Compile Include="Components\InfoBoxController.cs" />
     <Compile Include="MainEntry.cs" />
     <Compile Include="Components\Payload.cs" />
-    <Compile Include="Components\InfoBox.cs" />
     <Compile Include="DamageCalcPlugin.cs" />
     <Compile Include="Dispatchers\PluginDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
